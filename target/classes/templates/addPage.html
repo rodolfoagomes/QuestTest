@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+  <title>Spring Boot CRUD Example</title>
+
+</head>
+
+<body>
+	<div  layout:fragment="content">
+	   <div class="container">
+		   <div class="row">
+		      <div class="col-md-offset-3 col-md-6">
+		      
+		           <div th:if="${savePerson eq 'unsuccess'}">
+		              <div class="alert alert-danger alert-dismissible" role="alert">
+						  <strong>Error!</strong> Person Data Not save (PPS Number exist).
+						</div>
+		           </div>
+		           <div th:if="${savePerson eq 'success'}">
+		              <div class="alert alert-success alert-dismissible" role="alert">
+						  <strong>Success!</strong> Person Data Saved Successfully.
+						</div>
+		           </div>
+
+		           
+		          <div class="panel panel-success">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Add Person</h3>
+					  </div>
+					     <div class="panel-body">
+					       <form th:object="${person}" th:action="@{/person/save}" id="questform" name="questform" action="#" method="post">
+					         <input type="text" th:field="*{name}" maxlength="25" required class="form-control" placeholder="Name"/>
+					         <div style="clear:both; display:block;height:10px;"></div>
+					         <input type="text" th:field="*{ppsNumber}" required class="form-control" placeholder="PPS Number"/>
+					         <div style="clear:both; display:block;height:10px;"></div>
+					         <input type="text" readonly="true" id="dtBirth" required th:field="*{dtBirth}" class="form-control" placeholder="Date of Birth 99/99/9999"/>
+					         <div style="clear:both; display:block;height:10px;"></div>
+							   <input type="text" th:field="*{mobileNumber}" class="form-control" placeholder="Mobile Number 083 999 9999"/>
+							   <div style="clear:both; display:block;height:10px;"></div>
+					         <input type="submit" class="btn btn-danger pull-right" value="Save">
+					       </form>
+					      </div>
+					       
+					       <div class="panel-footer">
+								 <a th:href="@{/page}" class="btn btn-success">Back To Home</a>
+					       </div>
+					</div>
+		      </div>
+		   </div>
+		
+		</div>
+	
+	</div>
+
+</body>
+
+</html>

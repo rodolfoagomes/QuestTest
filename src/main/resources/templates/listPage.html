@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+  <title>Quest Test</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		   
+		   <div class="row"  style="margin-bottom:50px;">
+		      <div class="col-md-offset-2 col-md-8">
+		            <div class="panel panel-success">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">All Records</h3>
+					  </div>
+					     <div class="panel-body">
+					              <table class="table table-bordered">
+									<thead>
+									   <tr class="btn-success">
+									     <th>Name</th>
+									     <th>PPS Number</th>
+									     <th>Date of Birth</th>
+									     <th>Mobile Phone</th>
+									   </tr>
+									</thead>
+									<tbody>
+									     <tr th:if="${#lists.isEmpty(all)}" class="btn-warning">
+									        <td colspan="4" align="center">No records have been created!!!</td>
+									     </tr>
+										   <tr th:each="p : ${all}">
+											 <td th:text="${p.name}"></td>
+										     <td th:text="${p.ppsNumber}"></td>
+										     <td th:text="${p.dtBirth}"></td>
+										     <td th:text="${p.mobileNumber}"></td>
+										   </tr>
+									    
+									</tbody>
+								</table>
+					      </div>
+
+						<div class="panel-footer">
+							<a th:href="@{/page}" class="btn btn-success">Back To Home</a>
+						</div>
+					          
+					</div>
+		       </div>
+		   </div>
+		</div>
+</body>
+</html>

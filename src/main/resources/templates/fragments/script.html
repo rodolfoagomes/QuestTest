@@ -1,0 +1,63 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+	
+<script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.min.js}"></script>
+<script th:src="@{/webjars/jquery-validation/1.14.0/jquery.validate.min.js}"></script>
+
+<script>
+
+
+    function calcDate(value){
+
+        var ano = value.substring(6,10);
+        var dataAtual = new Date()
+        var anoAtual = dataAtual.getFullYear();
+        var result = parseInt(anoAtual) - parseInt(ano);
+
+        if(result <16)
+            return false;
+        return true;
+
+    }
+
+
+
+    $( document ).ready(function() {
+
+        $.validator.addMethod("mobileNumber",function(value,element){
+            return this.optional(element) || value.startsWith('08');
+        },"Must begin with 08 prefix");
+
+
+        $.validator.addMethod("dtBirth",function(value,element){
+            return this.optional(element) || calcDate(value);
+        },"Must be over 16 years old");
+
+
+
+        console.log( "ready!" );
+        $(function() {
+            $( "#dtBirth" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                maxDate: "0D"
+
+            });
+
+        });
+
+        $("#questform").validate({
+            rules: {
+                mobileNumber: "mobileNumber",
+                dtBirth: "dtBirth"
+
+            },
+        });
+        $("#questform").validate();
+    });
+
+
+
+</script>
+
+
